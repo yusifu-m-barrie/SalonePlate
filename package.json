@@ -1,0 +1,48 @@
+{
+  "name": "saloneplate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium multi-restaurant food delivery marketplace for Sierra Leone",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=@saloneplate/api",
+    "dev:web": "npm run dev --workspace=@saloneplate/web",
+    "dev:mobile": "npm run start --workspace=@saloneplate/mobile -- --clear",
+    "expo": "npm run dev:mobile",
+    "expo:mobile": "npm run dev:mobile",
+    "build": "npm run build --workspaces --if-present",
+    "db:generate": "npm run prisma:generate --workspace=@saloneplate/api",
+    "db:migrate": "npm run prisma:migrate --workspace=@saloneplate/api",
+    "db:seed": "npm run prisma:seed --workspace=@saloneplate/api",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "sync:ip": "powershell -ExecutionPolicy Bypass -File scripts/sync-lan-ip.ps1",
+    "normalize:media": "cd services/api && npx ts-node scripts/normalize-media-urls.ts",
+    "firewall:api": "powershell -ExecutionPolicy Bypass -File scripts/allow-api-firewall.ps1",
+    "docker:api:build": "docker build -f Dockerfile.api -t saloneplate-api .",
+    "build:web": "npm run build --workspace=@saloneplate/web",
+    "build:api": "npm run build --workspace=@saloneplate/api"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "metro-runtime": "0.83.7"
+  },
+  "overrides": {
+    "prisma": "6.1.0",
+    "@prisma/client": "6.1.0",
+    "react-native": "0.81.5",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  }
+}

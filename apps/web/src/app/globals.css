@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-dark: #071A2F;
+  --brand-gold: #D4AF37;
+  --brand-gray: #9CA3AF;
+}
+
+body {
+  @apply bg-brand-dark text-white antialiased;
+}
+
+.glass-card {
+  @apply rounded-2xl border border-white/10 bg-glass backdrop-blur-xl shadow-premium;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8962E 100%);
+}
+
+.input-field {
+  @apply w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-brand-gray focus:border-brand-gold/50 focus:outline-none;
+}
+
+select.input-field {
+  @apply cursor-pointer;
+}
+
+select.input-field option {
+  background-color: #ffffff;
+  color: #111827;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-brand-gold/40;
+}

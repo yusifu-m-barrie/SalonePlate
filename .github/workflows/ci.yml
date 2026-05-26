@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: saloneplate
+          POSTGRES_PASSWORD: saloneplate_secret
+          POSTGRES_DB: saloneplate
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Prisma client
+        run: npm run db:generate
+        env:
+          DATABASE_URL: postgresql://saloneplate:saloneplate_secret@localhost:5432/saloneplate
+
+      - name: Validate Prisma schema
+        working-directory: services/api
+        run: npx prisma validate
+        env:
+          DATABASE_URL: postgresql://saloneplate:saloneplate_secret@localhost:5432/saloneplate
+
+      - name: Build API
+        run: npm run build --workspace=@saloneplate/api
+
+      - name: Build Web
+        run: npm run build --workspace=@saloneplate/web
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:4000/api/v1
+          NEXTAUTH_SECRET: ci-secret-for-build-only-min-32-chars
+          NEXTAUTH_URL: http://localhost:3000

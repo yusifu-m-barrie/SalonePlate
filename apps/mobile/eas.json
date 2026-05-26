@@ -1,0 +1,32 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://REPLACE_WITH_YOUR_API_HOST/api/v1",
+        "EXPO_PUBLIC_SOCKET_URL": "https://REPLACE_WITH_YOUR_API_HOST"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://REPLACE_WITH_YOUR_API_HOST/api/v1",
+        "EXPO_PUBLIC_SOCKET_URL": "https://REPLACE_WITH_YOUR_API_HOST"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

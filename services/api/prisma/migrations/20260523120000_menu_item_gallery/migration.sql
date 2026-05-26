@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "MenuItem" ADD COLUMN IF NOT EXISTS "galleryUrls" TEXT[] DEFAULT ARRAY[]::TEXT[];
