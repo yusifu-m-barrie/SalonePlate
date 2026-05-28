@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { Store, UtensilsCrossed, ShoppingBag, Settings, LogOut, Tag, Banknote } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SalonePlateLogo } from '@/components/brand/SalonePlateLogo';
 
 const ownerNav = [
   { href: '/restaurant', label: 'My Restaurant', icon: Store },
@@ -28,12 +29,10 @@ export function RestaurantSidebar() {
 
   return (
     <aside className="w-64 min-h-screen border-r border-white/10 bg-brand-dark/80 backdrop-blur-xl p-4 flex flex-col">
-      <div className="mb-8 px-2">
-        <h1 className="text-xl font-bold">
-          Salone<span className="text-brand-gold">Plate</span>
-        </h1>
+      <div className="mb-8 px-2 flex flex-col items-center gap-2">
+        <SalonePlateLogo width={120} height={126} />
         <p className="text-xs text-brand-gold">Restaurant Owner</p>
-        <p className="text-[10px] text-brand-gray mt-1">Manage your menu & orders</p>
+        <p className="text-[10px] text-brand-gray text-center">Manage your menu & orders</p>
       </div>
 
       <nav className="flex-1 space-y-1">

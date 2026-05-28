@@ -3,6 +3,7 @@ import { Link } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../src/components/ui/Button';
+import { SalonePlateLogo } from '../../src/components/ui/SalonePlateLogo';
 import { CustomerGoogleAuthButton } from '../../src/components/auth/CustomerGoogleAuthButton';
 import { GoogleNotConfiguredHint } from '../../src/components/auth/GoogleSignInButton';
 import { colors, spacing } from '../../src/constants/theme';
@@ -13,9 +14,7 @@ export default function WelcomeScreen() {
       <LinearGradient colors={[colors.darkBlue, '#0A2540', colors.darkBlue]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={styles.content}>
         <View style={styles.hero}>
-          <Text style={styles.logo}>
-            Salone<Text style={styles.gold}>Plate</Text>
-          </Text>
+          <SalonePlateLogo size={200} />
           <Text style={styles.tagline}>Premium food delivery{'\n'}for Sierra Leone</Text>
           <Text style={styles.city}>📍 Makeni</Text>
         </View>
@@ -44,9 +43,7 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   content: { flex: 1, justifyContent: 'space-between', padding: spacing.lg },
   hero: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  logo: { fontSize: 42, fontWeight: '800', color: colors.white },
-  gold: { color: colors.gold },
-  tagline: { color: colors.softGray, fontSize: 18, textAlign: 'center', marginTop: spacing.md, lineHeight: 26 },
+  tagline: { color: colors.softGray, fontSize: 18, textAlign: 'center', marginTop: spacing.lg, lineHeight: 26 },
   city: { color: colors.gold, marginTop: spacing.lg, fontSize: 16 },
   actions: { gap: 12 },
 });

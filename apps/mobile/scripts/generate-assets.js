@@ -10,8 +10,16 @@ const PNG = Buffer.from(
 const assetsDir = path.join(__dirname, '..', 'assets');
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
 
+const logoPath = path.join(assetsDir, 'logo.png');
+const hasLogo = fs.existsSync(logoPath);
+
 ['icon.png', 'splash.png', 'adaptive-icon.png', 'notification-icon.png'].forEach((file) => {
   const dest = path.join(assetsDir, file);
-  fs.writeFileSync(dest, PNG);
-  console.log('Created', dest);
+  if (hasLogo) {
+    fs.copyFileSync(logoPath, dest);
+    console.log('Copied logo.png →', dest);
+  } else {
+    fs.writeFileSync(dest, PNG);
+    console.log('Created placeholder', dest);
+  }
 });

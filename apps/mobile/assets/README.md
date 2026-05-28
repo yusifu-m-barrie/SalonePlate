@@ -7,6 +7,6 @@ Add the following image files for production builds:
 - `adaptive-icon.png` — 1024×1024 Android adaptive icon
 - `notification-icon.png` — 96×96 notification icon
 
-Recommended: Gold "SP" logo on `#071A2F` background.
+Place `logo.png` here (official SalonePlate branding). `npm run postinstall` copies it to icon/splash/adaptive-icon when present.
 
 Expo will use defaults if missing during development.

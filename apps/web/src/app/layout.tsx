@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 export const metadata: Metadata = {
   title: 'SalonePlate Admin',
   description: 'Premium food delivery marketplace dashboard',
+  icons: { icon: '/logo.png', apple: '/logo.png' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

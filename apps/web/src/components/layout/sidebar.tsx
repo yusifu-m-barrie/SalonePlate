@@ -17,6 +17,7 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SalonePlateLogo } from '@/components/brand/SalonePlateLogo';
 
 const adminNav = [
   { href: '/dashboard', label: 'Analytics', icon: LayoutDashboard },
@@ -45,10 +46,8 @@ export function Sidebar() {
 
   return (
     <aside className="w-64 min-h-screen border-r border-white/10 bg-brand-dark/80 backdrop-blur-xl p-4 flex flex-col">
-      <div className="mb-8 px-2">
-        <h1 className="text-xl font-bold">
-          Salone<span className="text-brand-gold">Plate</span>
-        </h1>
+      <div className="mb-8 px-2 flex flex-col items-center gap-2">
+        <SalonePlateLogo width={120} height={126} />
         <p className="text-xs text-brand-gray">Makeni Admin</p>
       </div>
 

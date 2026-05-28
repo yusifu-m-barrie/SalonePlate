@@ -1,10 +1,10 @@
-import { View, ActivityIndicator } from 'react-native';
 import { Redirect, Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useQuery } from '@tanstack/react-query';
 import { colors } from '../../src/constants/theme';
 import { useAuthStore } from '../../src/stores/authStore';
 import { api } from '../../src/lib/api';
+import { AppLoadingScreen } from '../../src/components/ui/AppLoadingScreen';
 
 export default function RestaurantTabLayout() {
   const { isAuthenticated, isLoading, user } = useAuthStore();
@@ -25,11 +25,7 @@ export default function RestaurantTabLayout() {
   const activeBadge = dashboard?.stats?.activeOrders;
 
   if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.darkBlue }}>
-        <ActivityIndicator size="large" color={colors.gold} />
-      </View>
-    );
+    return <AppLoadingScreen message="Loading restaurant…" />;
   }
 
   if (!isAuthenticated) {

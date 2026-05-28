@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import { BrandLoader } from '@/components/brand/BrandLoader';
 
 export function RestaurantAuthGuard({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
@@ -29,11 +30,7 @@ export function RestaurantAuthGuard({ children }: { children: React.ReactNode })
   }, [status, session?.user?.role, router]);
 
   if (status === 'loading') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-brand-dark text-brand-gray">
-        Loading restaurant dashboard…
-      </div>
-    );
+    return <BrandLoader message="Loading restaurant dashboard…" />;
   }
 
   if (status === 'unauthenticated') {

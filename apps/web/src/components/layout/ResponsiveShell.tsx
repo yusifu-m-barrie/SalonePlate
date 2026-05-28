@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { SalonePlateLogo } from '@/components/brand/SalonePlateLogo';
 
 type Props = {
   sidebar: React.ReactNode;
@@ -35,7 +36,10 @@ export function ResponsiveShell({ sidebar, children, title }: Props) {
           >
             <Menu className="h-5 w-5" />
           </button>
-          <div className="min-w-0 flex-1 truncate text-sm font-semibold">{title || 'SalonePlate'}</div>
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <SalonePlateLogo width={36} height={38} className="shrink-0" />
+            <span className="truncate text-sm font-semibold">{title || 'SalonePlate'}</span>
+          </div>
         </div>
 
         <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">{children}</main>

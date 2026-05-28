@@ -4,6 +4,7 @@ import { appAlert } from '../../src/lib/appAlert';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../src/components/ui/Button';
+import { SalonePlateLogo } from '../../src/components/ui/SalonePlateLogo';
 import { CustomerGoogleAuthButton } from '../../src/components/auth/CustomerGoogleAuthButton';
 import { GoogleNotConfiguredHint } from '../../src/components/auth/GoogleSignInButton';
 import { useAuthStore } from '../../src/stores/authStore';
@@ -48,6 +49,7 @@ export default function LoginScreen() {
       <TouchableOpacity onPress={() => router.replace('/(tabs)')}>
         <Text style={styles.back}>← Back</Text>
       </TouchableOpacity>
+      <SalonePlateLogo size={140} containerStyle={styles.logoWrap} />
       <Text style={styles.title}>Welcome back</Text>
       <Text style={styles.subtitle}>Sign in to continue</Text>
 
@@ -96,6 +98,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.darkBlue, padding: spacing.lg },
   back: { color: colors.gold, marginBottom: spacing.lg },
+  logoWrap: { alignSelf: 'center', marginBottom: spacing.md },
   title: { fontSize: 28, fontWeight: '700', color: colors.white },
   subtitle: { color: colors.softGray, marginTop: 4, marginBottom: spacing.lg },
   divider: { flexDirection: 'row', alignItems: 'center', marginVertical: spacing.lg, gap: 12 },

@@ -4,6 +4,7 @@ import { signIn, getSession, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { SalonePlateLogo } from '@/components/brand/SalonePlateLogo';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -51,11 +52,9 @@ export default function LoginPage() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md glass-card p-8"
       >
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">
-            Salone<span className="text-brand-gold">Plate</span>
-          </h1>
-          <p className="text-brand-gray mt-2">Admin or restaurant owner sign-in</p>
+        <div className="flex flex-col items-center mb-8 gap-3">
+          <SalonePlateLogo width={150} height={158} priority />
+          <p className="text-brand-gray text-sm">Admin or restaurant owner sign-in</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
