@@ -132,14 +132,6 @@ npm run start
 
 ---
 
-## Demo Accounts
-
-| Role | Credentials | Password |
-|------|-------------|----------|
-| Super Admin | admin@saloneplate.sl | Password123! |
-| Customer | customer@demo.sl | Password123! |
-| Customer Phone | +23276123456 | OTP (see API console in dev) |
-| Rider | +23276999888 | Password123! |
 
 ---
 
@@ -208,14 +200,7 @@ Proprietary — SalonePlate © 2026
 
 
 
-## Database connection (Supabase + Prisma)
 
-If the API crashes with `Timed out fetching a new connection from the connection pool` (P2024):
-
-1. In `services/api/.env`, use the **transaction pooler** on port **6543** (not 5432):
-   `...@aws-0-eu-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true&connect_timeout=30&pool_timeout=30&connection_limit=5`
-2. Stop all running `npm run dev:api` terminals, then start **one** instance only.
-3. Test: `cd services/api && node scripts/test-db-connection.js` — should print `OK`.
 
 ## Mobile sign up
 
@@ -231,7 +216,7 @@ Use the **admin account** (not your new restaurant mobile sign-up):
 
 1. Start API: `cd services/api` → `npm run dev`
 2. Start web: `npm run dev:web` → http://localhost:3000/login
-3. Sign in: `admin@saloneplate.sl` / `Password123!`
+3. Sign in: `..........................`
 2. Open **Restaurants** or **Riders** in the sidebar.
 3. Use **Approve** / **Reject** on pending sign-ups (data comes from the database).
 
@@ -261,7 +246,3 @@ Set `API_PUBLIC_URL` in `services/api/.env` to your PC IP (same host as mobile `
 
 ---
 
- Demo accounts (password: Password123!):
-  Admin: admin@saloneplate.sl
-  Customer: +23276123456 / customer@demo.sl
-  Rider: +23276999888
