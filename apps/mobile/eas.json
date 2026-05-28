@@ -14,15 +14,15 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://REPLACE_WITH_YOUR_API_HOST/api/v1",
-        "EXPO_PUBLIC_SOCKET_URL": "https://REPLACE_WITH_YOUR_API_HOST"
+        "EXPO_PUBLIC_API_URL": "https://saloneplate-api.onrender.com/api/v1",
+        "EXPO_PUBLIC_SOCKET_URL": "https://saloneplate-api.onrender.com"
       }
     },
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://REPLACE_WITH_YOUR_API_HOST/api/v1",
-        "EXPO_PUBLIC_SOCKET_URL": "https://REPLACE_WITH_YOUR_API_HOST"
+        "EXPO_PUBLIC_API_URL": "https://saloneplate-api.onrender.com/api/v1",
+        "EXPO_PUBLIC_SOCKET_URL": "https://saloneplate-api.onrender.com"
       }
     }
   },

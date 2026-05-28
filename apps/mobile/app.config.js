@@ -17,6 +17,9 @@ module.exports = {
     ios: {
       supportsTablet: true,
       bundleIdentifier: 'sl.saloneplate.app',
+      infoPlist: {
+        ITSAppUsesNonExemptEncryption: false,
+      },
     },
     android: {
       adaptiveIcon: {
@@ -36,6 +39,11 @@ module.exports = {
         },
       ],
     ],
+    extra: {
+      eas: {
+        projectId: 'eac2bfac-f216-4576-977e-c2c8ae217012',
+      },
+    },
     experiments: {
       typedRoutes: true,
     },
