@@ -15,5 +15,7 @@ coverage/
 .DS_Store
 Thumbs.db
 *.pem
-uploads/
+# Ignore only runtime upload folders (keep services/api/src/uploads source code)
+/uploads/
+/services/api/uploads/
 .prisma/
