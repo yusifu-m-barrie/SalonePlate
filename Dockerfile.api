@@ -26,4 +26,6 @@ COPY --from=builder /app/services/api/prisma ./prisma
 
 EXPOSE 4000
 
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
+# Use DIRECT_URL for migrations (avoids pgbouncer/transaction pooler issues),
+# then start the API with the normal DATABASE_URL.
+CMD ["sh", "-c", "DATABASE_URL=\"$DIRECT_URL\" npx prisma migrate deploy && node dist/main.js"]
