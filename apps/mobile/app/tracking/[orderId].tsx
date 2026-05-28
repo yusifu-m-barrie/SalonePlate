@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, type Region } from 'react-native-maps';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { io } from 'socket.io-client';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -37,12 +37,27 @@ type OrderDetail = {
 };
 
 export default function TrackingScreen() {
-  const { orderId } = useLocalSearchParams<{ orderId: string }>();
+  const params = useLocalSearchParams<{ orderId?: string | string[] }>();
+  const orderId = Array.isArray(params.orderId) ? params.orderId[0] : params.orderId;
   const { isLoading: authLoading } = useRequireAuth();
   const queryClient = useQueryClient();
   const [mapCenter, setMapCenter] = useState({ latitude: 8.887, longitude: -12.043 });
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  const mapRef = useRef<MapView | null>(null);
+
+  const region: Region = useMemo(() => {
+    const lat = Number(mapCenter.latitude);
+    const lng = Number(mapCenter.longitude);
+    const safeLat = Number.isFinite(lat) ? lat : 8.887;
+    const safeLng = Number.isFinite(lng) ? lng : -12.043;
+    return {
+      latitude: safeLat,
+      longitude: safeLng,
+      latitudeDelta: 0.02,
+      longitudeDelta: 0.02,
+    };
+  }, [mapCenter.latitude, mapCenter.longitude]);
 
   const { data: order } = useQuery({
     queryKey: ['order', orderId],
@@ -103,6 +118,16 @@ export default function TrackingScreen() {
     const coords = order ? getDeliveryCoords(order) : null;
     if (coords) {
       setMapCenter({ latitude: coords.lat, longitude: coords.lng });
+      // Smoothly move the map when we get real coords.
+      mapRef.current?.animateToRegion(
+        {
+          latitude: coords.lat,
+          longitude: coords.lng,
+          latitudeDelta: 0.02,
+          longitudeDelta: 0.02,
+        },
+        400,
+      );
     }
   }, [order]);
 
@@ -128,14 +153,12 @@ export default function TrackingScreen() {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        region={{
-          latitude: mapCenter.latitude,
-          longitude: mapCenter.longitude,
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
+        ref={(r) => {
+          mapRef.current = r;
         }}
+        initialRegion={region}
       >
-        <Marker coordinate={mapCenter} title="Delivery address" pinColor={colors.gold} />
+        <Marker coordinate={{ latitude: region.latitude, longitude: region.longitude }} title="Delivery address" pinColor={colors.gold} />
       </MapView>
 
       <SafeAreaView style={styles.topBar} edges={['top']}>
