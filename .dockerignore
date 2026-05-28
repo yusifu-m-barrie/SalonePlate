@@ -2,16 +2,19 @@ node_modules
 **/node_modules
 .git
 .github
-apps
-docs
-*.md
+# Keep monorepo folders needed for Docker builds
+# (Render builds from repo root with Dockerfile.api)
+# apps
+# docs
+# *.md
 .env
 .env.*
 !.env.example
 **/.next
 **/dist
-uploads
-**/uploads
+# Ignore only runtime uploads folders (keep src/uploads code)
+/uploads
+/services/api/uploads
 *.log
 .DS_Store
 terminals
