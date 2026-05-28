@@ -37,7 +37,7 @@ export function ResponsiveShell({ sidebar, children, title }: Props) {
             <Menu className="h-5 w-5" />
           </button>
           <div className="flex min-w-0 flex-1 items-center gap-2">
-            <SalonePlateLogo width={36} height={38} className="shrink-0" />
+            <SalonePlateLogo variant="mark" onDark width={28} height={28} className="shrink-0" />
             <span className="truncate text-sm font-semibold">{title || 'SalonePlate'}</span>
           </div>
         </div>

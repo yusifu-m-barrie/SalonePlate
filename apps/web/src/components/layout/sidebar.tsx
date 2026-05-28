@@ -46,9 +46,9 @@ export function Sidebar() {
 
   return (
     <aside className="w-64 min-h-screen border-r border-white/10 bg-brand-dark/80 backdrop-blur-xl p-4 flex flex-col">
-      <div className="mb-8 px-2 flex flex-col items-center gap-2">
-        <SalonePlateLogo width={120} height={126} />
-        <p className="text-xs text-brand-gray">Makeni Admin</p>
+      <div className="mb-6 px-2">
+        <SalonePlateLogo variant="sidebar" onDark showWordmark />
+        <p className="text-[10px] text-brand-gray text-center mt-2">Makeni Admin</p>
       </div>
 
       <nav className="flex-1 space-y-1">

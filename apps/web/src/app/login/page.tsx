@@ -53,7 +53,7 @@ export default function LoginPage() {
         className="w-full max-w-md glass-card p-8"
       >
         <div className="flex flex-col items-center mb-8 gap-3">
-          <SalonePlateLogo width={150} height={158} priority />
+          <SalonePlateLogo variant="sidebar" onDark showWordmark />
           <p className="text-brand-gray text-sm">Admin or restaurant owner sign-in</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">

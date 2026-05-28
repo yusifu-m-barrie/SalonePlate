@@ -29,10 +29,10 @@ export function RestaurantSidebar() {
 
   return (
     <aside className="w-64 min-h-screen border-r border-white/10 bg-brand-dark/80 backdrop-blur-xl p-4 flex flex-col">
-      <div className="mb-8 px-2 flex flex-col items-center gap-2">
-        <SalonePlateLogo width={120} height={126} />
-        <p className="text-xs text-brand-gold">Restaurant Owner</p>
-        <p className="text-[10px] text-brand-gray text-center">Manage your menu & orders</p>
+      <div className="mb-6 px-2">
+        <SalonePlateLogo variant="sidebar" onDark showWordmark />
+        <p className="text-[10px] text-brand-gold text-center mt-2">Restaurant Owner</p>
+        <p className="text-[10px] text-brand-gray text-center">Menu & orders</p>
       </div>
 
       <nav className="flex-1 space-y-1">

@@ -14,7 +14,7 @@ export default function WelcomeScreen() {
       <LinearGradient colors={[colors.darkBlue, '#0A2540', colors.darkBlue]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={styles.content}>
         <View style={styles.hero}>
-          <SalonePlateLogo size={200} />
+          <SalonePlateLogo variant="mark" size={72} onDark showWordmark />
           <Text style={styles.tagline}>Premium food delivery{'\n'}for Sierra Leone</Text>
           <Text style={styles.city}>📍 Makeni</Text>
         </View>

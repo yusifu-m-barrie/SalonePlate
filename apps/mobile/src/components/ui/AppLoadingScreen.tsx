@@ -36,7 +36,7 @@ export function AppLoadingScreen({ message = 'Loading…' }: Props) {
   return (
     <View style={styles.container}>
       <Animated.View style={logoAnim}>
-        <SalonePlateLogo size={180} />
+        <SalonePlateLogo variant="mark" size={80} />
       </Animated.View>
       <ActivityIndicator size="large" color={colors.gold} style={styles.spinner} />
       {message ? <Text style={styles.message}>{message}</Text> : null}

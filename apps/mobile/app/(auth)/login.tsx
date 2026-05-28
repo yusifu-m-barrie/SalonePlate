@@ -49,7 +49,7 @@ export default function LoginScreen() {
       <TouchableOpacity onPress={() => router.replace('/(tabs)')}>
         <Text style={styles.back}>← Back</Text>
       </TouchableOpacity>
-      <SalonePlateLogo size={140} containerStyle={styles.logoWrap} />
+      <SalonePlateLogo variant="sidebar" size={56} onDark containerStyle={styles.logoWrap} />
       <Text style={styles.title}>Welcome back</Text>
       <Text style={styles.subtitle}>Sign in to continue</Text>
 
