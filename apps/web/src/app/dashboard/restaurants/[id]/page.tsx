@@ -32,6 +32,7 @@ type RestaurantDetail = {
     minOrderAmount: number;
     commissionRate: number;
     createdAt: string;
+    approvedAt?: string | null;
     walletBalance: number;
     escrowBalance: number;
     owner?: {
