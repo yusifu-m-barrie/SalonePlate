@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import api from '@/lib/api';
+import { formatDateTime } from '@/lib/formatDate';
 
 type RestaurantRow = {
   id: string;
@@ -14,6 +15,7 @@ type RestaurantRow = {
   isBusy?: boolean;
   phone?: string | null;
   createdAt: string;
+  approvedAt?: string | null;
   city?: { name: string };
   owner?: { firstName?: string; lastName?: string; email?: string; phone?: string };
   activeOrdersCount?: number;
@@ -182,6 +184,12 @@ function RestaurantInfo({ restaurant: r }: { restaurant: RestaurantRow }) {
       {(r.activeOrdersCount ?? 0) > 0 && (
         <p className="text-brand-gold text-xs mt-1">{r.activeOrdersCount} active order(s)</p>
       )}
+      <p className="text-brand-gray text-xs mt-2">
+        Registered: {formatDateTime(r.createdAt)}
+        {r.status === 'APPROVED' && (
+          <> · Approved: {formatDateTime(r.approvedAt)}</>
+        )}
+      </p>
     </div>
   );
 }

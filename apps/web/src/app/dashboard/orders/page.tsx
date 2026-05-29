@@ -190,6 +190,7 @@ export default function AdminOrdersPage() {
               <th className="text-left p-4">Restaurant</th>
               <th className="text-left p-4">Customer</th>
               <th className="text-left p-4">Items</th>
+              <th className="text-left p-4">Date</th>
               <th className="text-left p-4">Status</th>
               <th className="text-right p-4">Total</th>
             </tr>
@@ -201,7 +202,6 @@ export default function AdminOrdersPage() {
                   <Link href={`/dashboard/orders/${o.id}`} className="text-brand-gold font-medium hover:underline">
                     {o.orderNumber}
                   </Link>
-                  <p className="text-xs text-brand-gray mt-1">{formatDateTime(o.createdAt)}</p>
                 </td>
                 <td className="p-4">{o.restaurant?.name}</td>
                 <td className="p-4">
@@ -211,6 +211,7 @@ export default function AdminOrdersPage() {
                 <td className="p-4 text-brand-gray max-w-[200px] truncate">
                   {o.items.map((i) => `${i.quantity}× ${i.name}`).join(', ')}
                 </td>
+                <td className="p-4 text-brand-gray whitespace-nowrap">{formatDateTime(o.createdAt)}</td>
                 <td className="p-4">
                   <span className="px-2 py-1 rounded-full text-xs bg-brand-gold/20 text-brand-gold">
                     {ORDER_STATUS_LABEL[o.status] || o.status}

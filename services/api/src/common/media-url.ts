@@ -41,6 +41,9 @@ const URL_LIKE_KEYS =
 /** Deep-rewrite image fields in any API JSON payload. */
 export function rewriteMediaInJson<T>(data: T): T {
   if (data == null) return data;
+  if (data instanceof Date) {
+    return data.toISOString() as T;
+  }
   if (typeof data === 'string') {
     if (data.startsWith('/uploads/') || /\/uploads\//.test(data) || /^https?:\/\/(localhost|127\.0\.0\.1)/i.test(data)) {
       return (resolveMediaUrl(data) ?? data) as T;

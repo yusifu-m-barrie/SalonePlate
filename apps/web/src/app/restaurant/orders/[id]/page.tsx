@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import api from '@/lib/api';
 import { formatCurrency } from '@/lib/utils';
 import { ORDER_STATUS_LABEL, ACTIVE_ORDER_STATUSES } from '@/lib/orderStatus';
+import { formatDateTime } from '@/lib/formatDate';
 
 export default function RestaurantOrderDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -49,7 +50,7 @@ export default function RestaurantOrderDetailPage() {
         </Link>
         <h1 className="text-2xl font-bold mt-2">{order.orderNumber}</h1>
         <p className="text-brand-gray">
-          {ORDER_STATUS_LABEL[order.status] || order.status} · {new Date(order.createdAt).toLocaleString()}
+          {ORDER_STATUS_LABEL[order.status] || order.status} · {formatDateTime(order.createdAt)}
         </p>
       </div>
 
@@ -92,7 +93,7 @@ export default function RestaurantOrderDetailPage() {
             <div key={t.id} className="border-l-2 border-brand-gold/40 pl-4 mb-4">
               <p className="font-medium">{ORDER_STATUS_LABEL[t.status] || t.status}</p>
               {t.note && <p className="text-sm text-brand-gray">{t.note}</p>}
-              <p className="text-xs text-brand-gray">{new Date(t.createdAt).toLocaleString()}</p>
+              <p className="text-xs text-brand-gray">{formatDateTime(t.createdAt)}</p>
             </div>
           ))}
         </div>

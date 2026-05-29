@@ -3,7 +3,6 @@ import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { CustomerGoogleAuthButton } from '../../../src/components/auth/CustomerGoogleAuthButton';
-import { GoogleNotConfiguredHint } from '../../../src/components/auth/GoogleSignInButton';
 import { SIGNUP_ROLES, SignupRoleKey } from '../../../src/types/signup';
 import { colors, spacing, radius } from '../../../src/constants/theme';
 
@@ -19,7 +18,6 @@ export default function RegisterRoleScreen() {
       <View style={styles.googleBlock}>
         <Text style={styles.googleLabel}>Order food (customers)</Text>
         <CustomerGoogleAuthButton title="Sign up with Google (Gmail)" />
-        <GoogleNotConfiguredHint />
         <TouchableOpacity onPress={() => router.push('/(auth)/register/customer')}>
           <Text style={styles.emailAlt}>Or sign up with email →</Text>
         </TouchableOpacity>

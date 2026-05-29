@@ -3,7 +3,7 @@ import { appAlert } from '../../lib/appAlert';
 import { useAuthStore } from '../../stores/authStore';
 import { navigateAfterAuth } from '../../lib/navigation';
 import { usePendingRouteStore } from '../../stores/pendingRouteStore';
-import { GoogleSignInButton, GoogleNotConfiguredHint } from './GoogleSignInButton';
+import { GoogleSignInButton } from './GoogleSignInButton';
 import { isGoogleAuthConfigured } from '../../lib/googleAuth';
 
 type Props = {
@@ -24,7 +24,7 @@ export function CustomerGoogleAuthButton({
   const loading = externalLoading || busy;
 
   if (!isGoogleAuthConfigured()) {
-    return <GoogleNotConfiguredHint />;
+    return null;
   }
 
   const handleToken = async (idToken: string) => {

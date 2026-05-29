@@ -1,12 +1,20 @@
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import { appAlert } from '../../src/lib/appAlert';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../src/components/ui/Button';
 import { SalonePlateLogo } from '../../src/components/ui/SalonePlateLogo';
 import { CustomerGoogleAuthButton } from '../../src/components/auth/CustomerGoogleAuthButton';
-import { GoogleNotConfiguredHint } from '../../src/components/auth/GoogleSignInButton';
 import { useAuthStore } from '../../src/stores/authStore';
 import { navigateAfterAuth } from '../../src/lib/navigation';
 import { usePendingRouteStore } from '../../src/stores/pendingRouteStore';
@@ -46,57 +54,70 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => router.replace('/(tabs)')}>
-        <Text style={styles.back}>← Back</Text>
-      </TouchableOpacity>
-      <SalonePlateLogo variant="sidebar" size={56} onDark containerStyle={styles.logoWrap} />
-      <Text style={styles.title}>Welcome back</Text>
-      <Text style={styles.subtitle}>Sign in to continue</Text>
+      <KeyboardAvoidingView
+        style={styles.flex}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 8 : 0}
+      >
+        <ScrollView
+          contentContainerStyle={styles.scroll}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <TouchableOpacity onPress={() => router.replace('/(tabs)')}>
+            <Text style={styles.back}>← Back</Text>
+          </TouchableOpacity>
+          <SalonePlateLogo variant="sidebar" size={56} onDark containerStyle={styles.logoWrap} />
+          <Text style={styles.title}>Welcome back</Text>
+          <Text style={styles.subtitle}>Sign in to continue</Text>
 
-      <CustomerGoogleAuthButton title="Continue with Google" loading={loading} />
-      <GoogleNotConfiguredHint />
+          <CustomerGoogleAuthButton title="Continue with Google" loading={loading} />
 
-      <View style={styles.divider}>
-        <View style={styles.line} />
-        <Text style={styles.dividerText}>or email</Text>
-        <View style={styles.line} />
-      </View>
+          <View style={styles.divider}>
+            <View style={styles.line} />
+            <Text style={styles.dividerText}>or email</Text>
+            <View style={styles.line} />
+          </View>
 
-      <View style={styles.form}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          value={email}
-          onChangeText={setEmail}
-          style={styles.input}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          placeholderTextColor={colors.softGray}
-          placeholder="your@email.com"
-        />
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          value={password}
-          onChangeText={setPassword}
-          style={styles.input}
-          secureTextEntry
-          placeholderTextColor={colors.softGray}
-          placeholder="••••••••"
-        />
-        <TouchableOpacity onPress={() => router.push('/(auth)/forgot-password')}>
-          <Text style={styles.forgot}>Forgot password?</Text>
-        </TouchableOpacity>
-        <Button title="Sign In" onPress={handleLogin} loading={loading} />
-      </View>
+          <View style={styles.form}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              value={email}
+              onChangeText={setEmail}
+              style={styles.input}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              placeholderTextColor={colors.softGray}
+              placeholder="your@email.com"
+            />
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              style={styles.input}
+              secureTextEntry
+              placeholderTextColor={colors.softGray}
+              placeholder="••••••••"
+            />
+            <TouchableOpacity onPress={() => router.push('/(auth)/forgot-password')}>
+              <Text style={styles.forgot}>Forgot password?</Text>
+            </TouchableOpacity>
+            <Button title="Sign In" onPress={handleLogin} loading={loading} />
+          </View>
 
-      <TouchableOpacity onPress={() => router.push('/(auth)/register/customer')} style={styles.signupLink}>
-        <Text style={styles.signupText}>Don&apos;t have an account? Sign up</Text>
-      </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/(auth)/register/customer')} style={styles.signupLink}>
+            <Text style={styles.signupText}>Don&apos;t have an account? Sign up</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.darkBlue, padding: spacing.lg },
+  container: { flex: 1, backgroundColor: colors.darkBlue },
+  flex: { flex: 1 },
+  scroll: { flexGrow: 1, padding: spacing.lg, paddingBottom: 48 },
   back: { color: colors.gold, marginBottom: spacing.lg },
   logoWrap: { alignSelf: 'center', marginBottom: spacing.md },
   title: { fontSize: 28, fontWeight: '700', color: colors.white },

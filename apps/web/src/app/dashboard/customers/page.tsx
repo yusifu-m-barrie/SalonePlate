@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { Search } from 'lucide-react';
 import api from '@/lib/api';
 import { appConfirm } from '@/lib/appAlert';
+import { formatDateTime } from '@/lib/formatDate';
 
 type Customer = {
   id: string;
@@ -92,7 +93,7 @@ export default function CustomersPage() {
                   {c.phone && <p className="text-xs">{c.phone}</p>}
                 </td>
                 <td className="p-4">{c.orderCount}</td>
-                <td className="p-4 text-brand-gray">{new Date(c.createdAt).toLocaleDateString()}</td>
+                <td className="p-4 text-brand-gray">{formatDateTime(c.createdAt)}</td>
                 <td className="p-4 text-right">
                   {!c.isBanned ? (
                     <button

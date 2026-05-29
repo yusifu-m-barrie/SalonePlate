@@ -750,7 +750,12 @@ export class AdminService {
   approveRestaurant(id: string) {
     return this.prisma.restaurant.update({
       where: { id },
-      data: { status: RestaurantStatus.APPROVED, isVerified: true, isOpen: true },
+      data: {
+        status: RestaurantStatus.APPROVED,
+        isVerified: true,
+        isOpen: true,
+        approvedAt: new Date(),
+      },
     });
   }
 

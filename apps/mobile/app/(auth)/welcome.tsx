@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../src/components/ui/Button';
 import { SalonePlateLogo } from '../../src/components/ui/SalonePlateLogo';
 import { CustomerGoogleAuthButton } from '../../src/components/auth/CustomerGoogleAuthButton';
-import { GoogleNotConfiguredHint } from '../../src/components/auth/GoogleSignInButton';
 import { colors, spacing } from '../../src/constants/theme';
 
 export default function WelcomeScreen() {
@@ -20,7 +19,6 @@ export default function WelcomeScreen() {
         </View>
         <View style={styles.actions}>
           <CustomerGoogleAuthButton title="Continue with Google (Gmail)" />
-          <GoogleNotConfiguredHint />
           <Link href="/(tabs)" asChild>
             <Button title="Browse Restaurants" onPress={() => {}} variant="primary" />
           </Link>

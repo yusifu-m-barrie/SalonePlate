@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import api from '@/lib/api';
 import { formatCurrency } from '@/lib/utils';
 import { ORDER_STATUS_LABEL } from '@/lib/orderStatus';
+import { formatDateTime } from '@/lib/formatDate';
 import { MediaImage } from '@/components/ui/MediaImage';
 
 type RestaurantDetail = {
@@ -193,7 +194,10 @@ export default function AdminRestaurantDetailPage() {
             value={r.categories?.length ? r.categories.join(', ') : '—'}
           />
           {r.description && <p className="text-sm text-brand-gray pt-2">{r.description}</p>}
-          <p className="text-xs text-brand-gray">Registered {new Date(r.createdAt).toLocaleString()}</p>
+          <p className="text-xs text-brand-gray">
+            Registered {formatDateTime(r.createdAt)}
+            {r.status === 'APPROVED' && <> · Approved {formatDateTime(r.approvedAt)}</>}
+          </p>
         </div>
 
         <div className="glass-card p-6 space-y-3">
@@ -361,7 +365,7 @@ export default function AdminRestaurantDetailPage() {
                   <p className="font-medium">{o.orderNumber}</p>
                   <p className="text-xs text-brand-gray">
                     {[o.customer?.firstName, o.customer?.lastName].filter(Boolean).join(' ') || 'Customer'}{' '}
-                    · {new Date(o.createdAt).toLocaleString()}
+                    · {formatDateTime(o.createdAt)}
                   </p>
                 </div>
                 <div className="text-right">

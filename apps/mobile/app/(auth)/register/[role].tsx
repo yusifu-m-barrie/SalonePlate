@@ -16,7 +16,6 @@ import { Button } from '../../../src/components/ui/Button';
 import { useAuthStore } from '../../../src/stores/authStore';
 import { isGoogleAuthConfigured } from '../../../src/lib/googleAuth';
 import { CustomerGoogleAuthButton } from '../../../src/components/auth/CustomerGoogleAuthButton';
-import { GoogleNotConfiguredHint } from '../../../src/components/auth/GoogleSignInButton';
 import { SIGNUP_ROLES, SignupRoleKey } from '../../../src/types/signup';
 import { navigateAfterAuth } from '../../../src/lib/navigation';
 import { usePendingRouteStore } from '../../../src/stores/pendingRouteStore';
@@ -153,7 +152,11 @@ export default function RegisterFormScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 8 : 0}
+      >
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
           <TouchableOpacity onPress={() => router.back()}>
             <Text style={styles.back}>← Back</Text>
@@ -236,7 +239,6 @@ export default function RegisterFormScreen() {
                   phone: phone.trim() !== '+232' ? phone.trim() : undefined,
                 }}
               />
-              <GoogleNotConfiguredHint />
             </>
           )}
 

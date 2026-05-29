@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import api from '@/lib/api';
 import { formatCurrency } from '@/lib/utils';
 import { ORDER_STATUS_LABEL } from '@/lib/orderStatus';
+import { formatDateTime } from '@/lib/formatDate';
 
 export default function AdminOrderDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -36,7 +37,7 @@ export default function AdminOrderDetailPage() {
         </Link>
         <h1 className="text-2xl font-bold mt-2">{order.orderNumber}</h1>
         <p className="text-brand-gray">
-          {ORDER_STATUS_LABEL[order.status] || order.status} · {new Date(order.createdAt).toLocaleString()}
+          {ORDER_STATUS_LABEL[order.status] || order.status} · {formatDateTime(order.createdAt)}
         </p>
       </div>
 
@@ -117,7 +118,7 @@ export default function AdminOrderDetailPage() {
                 <div className="flex-1">
                   <p className="text-xs text-brand-gold uppercase">{c.actor} · {c.type.replace(/_/g, ' ')}</p>
                   <p className="mt-1">{c.message}</p>
-                  <p className="text-xs text-brand-gray mt-1">{new Date(c.createdAt).toLocaleString()}</p>
+                  <p className="text-xs text-brand-gray mt-1">{formatDateTime(c.createdAt)}</p>
                 </div>
               </div>
             ),

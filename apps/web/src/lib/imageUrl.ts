@@ -36,6 +36,9 @@ const URL_LIKE_KEYS =
 
 export function rewriteMediaInJson<T>(data: T): T {
   if (data == null) return data;
+  if (data instanceof Date) {
+    return data.toISOString() as T;
+  }
   if (typeof data === 'string') {
     if (
       data.startsWith('/uploads/') ||

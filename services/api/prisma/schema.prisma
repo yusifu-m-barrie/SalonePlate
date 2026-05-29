@@ -226,6 +226,7 @@ model Restaurant {
   favorites       Favorite[]
   promotions      Promotion[]
   analytics       RestaurantAnalytics[]
+  approvedAt      DateTime?
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
 
