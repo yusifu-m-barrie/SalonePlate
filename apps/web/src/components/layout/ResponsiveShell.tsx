@@ -21,12 +21,13 @@ export function ResponsiveShell({ sidebar, children, title }: Props) {
   }, [pathname]);
 
   return (
-    <div className="flex min-h-screen">
-      {/* Desktop sidebar */}
-      <div className="hidden md:block">{sidebar}</div>
+    <div className="min-h-screen">
+      {/* Desktop / tablet: fixed sidebar — stays in place while main content scrolls */}
+      <div className="hidden md:fixed md:inset-y-0 md:left-0 md:z-30 md:block md:w-64">
+        {sidebar}
+      </div>
 
-      {/* Mobile top bar */}
-      <div className="flex min-h-screen flex-1 flex-col">
+      <div className="flex min-h-screen flex-col md:ml-64">
         <div className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/10 bg-brand-dark/90 px-4 py-3 backdrop-blur md:hidden">
           <button
             type="button"
@@ -42,7 +43,7 @@ export function ResponsiveShell({ sidebar, children, title }: Props) {
           </div>
         </div>
 
-        <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
 
       {/* Mobile drawer */}

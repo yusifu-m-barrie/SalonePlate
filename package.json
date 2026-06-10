@@ -17,6 +17,7 @@
     "build": "npm run build --workspaces --if-present",
     "db:generate": "npm run prisma:generate --workspace=@saloneplate/api",
     "db:migrate": "npm run prisma:migrate --workspace=@saloneplate/api",
+    "db:deploy": "npm run prisma:deploy --workspace=@saloneplate/api",
     "db:seed": "npm run prisma:seed --workspace=@saloneplate/api",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",

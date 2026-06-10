@@ -159,6 +159,7 @@ export class OrdersService {
         tipAmount,
         totalAmount,
         paymentMethod: dto.paymentMethod,
+        paymentStatus: PaymentStatus.PENDING,
         deliveryAddress: {
           ...dto.deliveryAddress,
           distanceKm: Math.round(distanceKm * 10) / 10,
@@ -172,9 +173,10 @@ export class OrdersService {
           create: {
             method: dto.paymentMethod,
             amount: totalAmount,
-            status: dto.paymentMethod === PaymentMethod.CASH_ON_DELIVERY
-              ? PaymentStatus.PENDING
-              : PaymentStatus.PROCESSING,
+            status:
+              dto.paymentMethod === PaymentMethod.CASH_ON_DELIVERY
+                ? PaymentStatus.PENDING
+                : PaymentStatus.PENDING,
           },
         },
       },
@@ -297,10 +299,16 @@ export class OrdersService {
     });
 
     if (status === OrderStatus.DELIVERED && order.payment) {
-      await this.prisma.payment.update({
-        where: { id: order.payment.id },
-        data: { status: PaymentStatus.COMPLETED },
-      });
+      if (order.payment.method === PaymentMethod.CASH_ON_DELIVERY) {
+        await this.prisma.payment.update({
+          where: { id: order.payment.id },
+          data: { status: PaymentStatus.COMPLETED },
+        });
+        await this.prisma.order.update({
+          where: { id: orderId },
+          data: { paymentStatus: PaymentStatus.COMPLETED },
+        });
+      }
     }
 
     this.realtime.emitOrderUpdate(orderId, { status, order });

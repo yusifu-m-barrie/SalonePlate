@@ -158,7 +158,11 @@ export default function CheckoutScreen() {
         tipAmount: 0,
       });
       clearCart();
-      router.replace(`/tracking/${data.id}`);
+      if (paymentMethod === 'ORANGE_MONEY') {
+        router.replace(`/payment/orange-money/${data.id}`);
+      } else {
+        router.replace(`/tracking/${data.id}`);
+      }
     } catch (err: unknown) {
       const ax = err as { response?: { data?: { message?: string | string[] } } };
       const msg = ax.response?.data?.message;

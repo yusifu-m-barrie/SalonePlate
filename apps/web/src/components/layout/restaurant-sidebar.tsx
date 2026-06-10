@@ -28,7 +28,7 @@ export function RestaurantSidebar() {
   };
 
   return (
-    <aside className="w-64 min-h-screen border-r border-white/10 bg-brand-dark/80 backdrop-blur-xl p-4 flex flex-col">
+    <aside className="flex h-screen w-64 flex-col overflow-y-auto border-r border-white/10 bg-brand-dark/95 p-4 backdrop-blur-xl">
       <div className="mb-6 px-2">
         <SalonePlateLogo variant="sidebar" onDark showWordmark />
         <p className="text-[10px] text-brand-gold text-center mt-2">Restaurant Owner</p>

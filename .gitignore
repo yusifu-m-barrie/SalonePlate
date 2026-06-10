@@ -19,3 +19,4 @@ Thumbs.db
 /uploads/
 /services/api/uploads/
 .prisma/
+.vercel
